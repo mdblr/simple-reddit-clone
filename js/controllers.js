@@ -43,13 +43,7 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
       }
     ];
 
-    $scope.timestamps = [
-      {
-        id: 0,
-        date: 1462515998
-      }
-    ];
-
+    $scope.showComments = false; 
     $scope.commentForm = false;
     $scope.newComment = {};
 
