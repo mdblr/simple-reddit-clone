@@ -40,10 +40,35 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
             vote: -2
           }
         ]
+      },
+      {
+        id: 1,
+        title: "please don't headbang on the bust",
+        author: 'James Masir',
+        img: 'http://blog.iavm.org/wp-content/uploads/2014/07/headbanging.gif',
+        description: "The last thing I wan't after a long day is to get whipped in the face with your nasty-ass hair",
+        vote: -10,
+        date: moment.unix(1461111113).calendar(null, calendarParameters),
+        comments: [
+          {
+            post_id: 0,
+            author: 'Hillary Peterson',
+            comment: '666',
+            time: moment.unix(1462514116).calendar(null, calendarParameters),
+            vote: 666
+          },
+          {
+            post_id: 0,
+            author: 'Briane White',
+            comment: 'can you describe what their hair was like?',
+            time: moment.unix(1462501116).calendar(null, calendarParameters),
+            vote: 22
+          }
+        ]
       }
     ];
 
-    $scope.showComments = false; 
+    $scope.showComments = false;
     $scope.commentForm = false;
     $scope.newComment = {};
 
