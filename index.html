@@ -24,15 +24,28 @@
           <img ng-src='{{post.img}}' />
 
           <section class='c'>
-              
+
             <post>
               <h3>{{post.title}}</h3>
               <p class="desc">{{post.description}}</p>
               <h4>posted: {{post.date}} </h4>
             </post>
 
-            <h3>comments</h3>
-            <comments ng-repeat='comment in post.comments'>
+            <comment-header class='r baseLine'>
+
+              <a href='#' ng-click='showComments=!showComments'><h3> show comments</h3></a>
+              <pre>
+                <ng-pluralize count='post.comments.length' when="{
+                  '0': 'No comments',
+                  '1': '{{post.comments.length}} comment',
+                  'other': '{{post.comments.length}} comments'
+                  }">
+                </ng-pluralize>
+              </pre>
+
+            </comment-header>
+
+            <comments ng-show='showComments' ng-repeat='comment in post.comments'>
               <published-comments class='r'>
                 <div class='c'>
                   {{comment.author}}
@@ -47,23 +60,22 @@
                   <button type="button" ng-click='vote(comment, "down")'>down</button>
                 </div>
               </published-comments>
+            
+              <new-comment-form>
+                <a href='#' ng-click='commentForm=!commentForm'>comment</a>
+                <form name='thisForm' ng-show='commentForm'>
+                  <div>
+                    <h4>name (required)</h4>
+                    <input ng-model="newComment.author" required />
+                  </div>
+                  <div>
+                    <h4>comment (required)</h4>
+                    <textarea type='text' ng-model="newComment.comment" required></textarea>
+                  </div>
+                  <input type="submit" ng-click='postComment(post, newComment)'/>
+                </form>
+              </new-comment-form>
             </comments>
-
-            <new-comment-form>
-              <a href='#' ng-click='commentForm=!commentForm'>comment</a>
-              <form name='thisForm' ng-show='commentForm'>
-                <div>
-                  <h4>name (required)</h4>
-                  <input ng-model="newComment.author" required />
-                </div>
-                <div>
-                  <h4>comment (required)</h4>
-                  <textarea type='text' ng-model="newComment.comment" required></textarea>
-                </div>
-                <input type="submit" ng-click='postComment(post, newComment)'/>
-              </form>
-            </new-comment-form>
-
           </section>
 
           <section class='c'>
