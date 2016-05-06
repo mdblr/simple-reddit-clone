@@ -44,38 +44,38 @@
               </pre>
 
             </comment-header>
-
-            <comments ng-show='showComments' ng-repeat='comment in post.comments'>
-              <published-comments class='r'>
-                <div class='c'>
-                  {{comment.author}}
-                  <br />
-                  {{comment.comment}}
-                  <br />
-                  {{comment.time}}
-                </div>
-                <div>
-                  <h4>votes: {{ comment.vote }}</h4>
-                  <button type="button" ng-click='vote(comment, "up")'>up</button>
-                  <button type="button" ng-click='vote(comment, "down")'>down</button>
-                </div>
-              </published-comments>
-            
-              <new-comment-form>
-                <a href='#' ng-click='commentForm=!commentForm'>comment</a>
-                <form name='thisForm' ng-show='commentForm'>
-                  <div>
-                    <h4>name (required)</h4>
-                    <input ng-model="newComment.author" required />
-                  </div>
-                  <div>
-                    <h4>comment (required)</h4>
-                    <textarea type='text' ng-model="newComment.comment" required></textarea>
-                  </div>
-                  <input type="submit" ng-click='postComment(post, newComment)'/>
-                </form>
-              </new-comment-form>
-            </comments>
+              <section ng-show='showComments'>
+                <comments ng-repeat='comment in post.comments'>
+                  <published-comments class='r'>
+                    <div class='c'>
+                      {{comment.author}}
+                      <br />
+                      {{comment.comment}}
+                      <br />
+                      {{comment.time}}
+                    </div>
+                    <div>
+                      <h4>votes: {{ comment.vote }}</h4>
+                      <button type="button" ng-click='vote(comment, "up")'>up</button>
+                      <button type="button" ng-click='vote(comment, "down")'>down</button>
+                    </div>
+                  </published-comments>
+                </comments>
+                <new-comment-form>
+                  <a href='#' ng-click='commentForm=!commentForm'>comment</a>
+                  <form name='thisForm' ng-show='commentForm'>
+                    <div>
+                      <h4>name (required)</h4>
+                      <input ng-model="newComment.author" required />
+                    </div>
+                    <div>
+                      <h4>comment (required)</h4>
+                      <textarea type='text' ng-model="newComment.comment" required></textarea>
+                    </div>
+                    <input type="submit" ng-click='postComment(post, newComment)'/>
+                  </form>
+                </new-comment-form>
+              </section>
           </section>
 
           <section class='c'>
