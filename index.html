@@ -26,9 +26,10 @@
         <option value='-date[0]'>Newest</option>
       </select>
 
+      <a href='#' ng-click='hidePostForm=!hidePostForm'>New Post</a>
     </header>
 
-    <main>
+    <main class='c'>
 
       <section  ng-repeat='post in posts | orderBy: orderProp | filter: search'>
         <div class='r'>
@@ -40,7 +41,7 @@
               <h3>{{post.title}}</h3>
               <p class="desc">{{post.description}}</p>
               <h4>posted: {{post.date[1]}} </h4>
-              <p id='epoch'>{{post.date[0]}}</p>
+                <p id='epoch'>{{post.date[0]}}</p>
             </post>
 
             <comment-header class='r centerLine'>
@@ -90,6 +91,7 @@
               </section>
           </section>
 
+
           <section class='c'>
             <h4 class='centerLine'>votes: {{post.vote}} </h4>
               <aside class='r'>
@@ -97,9 +99,28 @@
                 <button type="button" name="button" ng-click='vote(post, "down")'>DownVote</button>
               </aside>
           </section>
-
         </div>
       </section>
+
+      <a href='#' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+      <new-post-form class='c'>
+        <form name='createPost' ng-show='hidePostForm'>
+          <div>
+            <h4>Title (required)</h4>
+            <input ng-model="newPost.title" required />
+          </div>
+          <div>
+            <h4> Write stuff (required)</h4>
+            <textarea type='text' ng-model="newPost.description" required></textarea>
+          </div>
+          <div>
+            <h4>Image URL (required)</h4>
+            <input ng-model="newPost.img" required />
+          </div>
+          <input type="submit" ng-click='postPost(newPost)'/>
+        </form>
+      </new-post-form>
+
     </main>
 
   </body>

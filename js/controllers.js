@@ -2,13 +2,11 @@
 
 var redditCloneCtrl = angular.module('redditCloneCtrl', []);
 
-
-
 redditCloneCtrl.controller('loadPageCtrl', ['$scope',
 
   function($scope) {
 
-    $scope.orderProp = '-date[0]';
+    $scope.orderProp = '-vote';
 
     var calendarParameters = {
       sameDay: '[Today] MM/DD/YYYY',
@@ -78,8 +76,8 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
         comments: [
           {
             post_id: 0,
-            author: 'Mike Carol',
-            comment: 'I believe the inspiration for this song was a time the band fought a bear, i could be wrong tho..',
+            author: 'Treasure Weekly',
+            comment: 'BOYS REPRESENTIN DC <3 YALL',
             time: moment.unix(1461974500).calendar(null, calendarParameters),
             vote: -2
           }
@@ -89,14 +87,26 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
 
     $scope.showComments = false;
     $scope.commentForm = false;
+    $scope.hidePostForm = false;
     $scope.newComment = {};
 
     $scope.postComment = function(post, newComment) {
       var timestamp = Date.now();
-      $scope.newComment.date = moment.unix(timestamp).calendar(null, calendarParameters);
+      $scope.newComment.time = moment().calendar(null, calendarParameters);
       $scope.newComment.vote = 0;
       $scope.newComment.id = ((Math.random()*1000000)+timestamp);
       post.comments.push(newComment);
     };
+
+    $scope.newPost = {};
+    $scope.postPost = function(newPost) {
+      var timestamp = moment().calendar;
+      $scope.newPost.author = 'tupac';
+      $scope.newPost.date = [new Date(), moment().calendar(null, calendarParameters)];
+      $scope.newPost.vote = 0;
+      $scope.newPost.id = ((Math.random()*1000000)+timestamp);
+      console.log($scope.newPost)
+      $scope.posts.push(newPost);
+    }
 
   }]);
