@@ -13,13 +13,24 @@
   </head>
   <body class='c' ng-controller='loadPageCtrl'>
 
-    <header>
+    <header class='r centerLine spaceBetween'>
       <h3>Home</h3>
+
+      <div>
+        <label>Search: </label>
+        <input ng-model='search' />
+      </div>
+
+      <select ng-model='orderProp'>
+        <option value='-vote'>Rating</option>
+        <option value='-date[0]'>Newest</option>
+      </select>
+
     </header>
 
-    <main ng-controller='loadPageCtrl'>
+    <main>
 
-      <section  ng-repeat='post in posts'>
+      <section  ng-repeat='post in posts | orderBy: orderProp | filter: search'>
         <div class='r'>
           <img ng-src='{{post.img}}' />
 
@@ -28,10 +39,11 @@
             <post>
               <h3>{{post.title}}</h3>
               <p class="desc">{{post.description}}</p>
-              <h4>posted: {{post.date}} </h4>
+              <h4>posted: {{post.date[1]}} </h4>
+              <p id='epoch'>{{post.date[0]}}</p>
             </post>
 
-            <comment-header class='r baseLine'>
+            <comment-header class='r centerLine'>
 
               <a href='#' ng-click='showComments=!showComments'><h3> show comments</h3></a>
               <pre>
@@ -79,7 +91,7 @@
           </section>
 
           <section class='c'>
-            <h4 class='baseLine'>votes: {{post.vote}} </h4>
+            <h4 class='centerLine'>votes: {{post.vote}} </h4>
               <aside class='r'>
                 <button type="button" name="button" ng-click='vote(post, "up")'>UpVote</button>
                 <button type="button" name="button" ng-click='vote(post, "down")'>DownVote</button>
