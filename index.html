@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app='simpleRedditClone'>
+  <head>
+    <meta charset="utf-8">
+    <title>simple reddit clone</title>
+    <script type="text/javascript" src='node_modules/angular/angular.js' /></script>
+      <script type="text/javascript" src='node_modules/angular-animate/angular-animate.js' /></script>
+    <script type="text/javascript" src='js/app.js'></script>
+    <script type="text/javascript" src='js/controllers.js'></script>
+    <script type="text/javascript" src='node_modules/moment/moment.js'></script>
+    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body class='c' ng-controller='loadPageCtrl'>
+
+    <header>
+      <h3>Home</h3>
+    </header>
+
+    <main ng-controller='loadPageCtrl'>
+
+      <section  ng-repeat='post in posts'>
+        <div class='r'>
+          <img ng-src='{{post.img}}' />
+
+          <section class='c'>
+              
+            <post>
+              <h3>{{post.title}}</h3>
+              <p class="desc">{{post.description}}</p>
+              <h4>posted: {{post.date}} </h4>
+            </post>
+
+            <h3>comments</h3>
+            <comments ng-repeat='comment in post.comments'>
+              <published-comments class='r'>
+                <div class='c'>
+                  {{comment.author}}
+                  <br />
+                  {{comment.comment}}
+                  <br />
+                  {{comment.time}}
+                </div>
+                <div>
+                  <h4>votes: {{ comment.vote }}</h4>
+                  <button type="button" ng-click='vote(comment, "up")'>up</button>
+                  <button type="button" ng-click='vote(comment, "down")'>down</button>
+                </div>
+              </published-comments>
+            </comments>
+
+            <new-comment-form>
+              <a href='#' ng-click='commentForm=!commentForm'>comment</a>
+              <form name='thisForm' ng-show='commentForm'>
+                <div>
+                  <h4>name (required)</h4>
+                  <input ng-model="newComment.author" required />
+                </div>
+                <div>
+                  <h4>comment (required)</h4>
+                  <textarea type='text' ng-model="newComment.comment" required></textarea>
+                </div>
+                <input type="submit" ng-click='postComment(post, newComment)'/>
+              </form>
+            </new-comment-form>
+
+          </section>
+
+          <section class='c'>
+            <h4 class='baseLine'>votes: {{post.vote}} </h4>
+              <aside class='r'>
+                <button type="button" name="button" ng-click='vote(post, "up")'>UpVote</button>
+                <button type="button" name="button" ng-click='vote(post, "down")'>DownVote</button>
+              </aside>
+          </section>
+
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
+
+
+
+<!-- id: 0,
+title: 'the best Jimmy Eat World song',
+author: 'Erica Surrey',
+image: 'http://i.imgur.com/C3WIWj8.jpg',
+description: "On sleepless roads, the sleepless go. Then be happy with the consequence. Don't think we're not serious. woh oh oh oh oh oh. Get out of this place while we still have time. I won't always love these selfish things. woh oh oh oh oh oh. No one else will know these lonely dreams. Clear your thoughts with speyside. That once we said goodbye. I felt for sure last night. If you only once would let me. (string from your tether unwinds). (when words lose their meaning). Our coal",
+votes: 4,
+date: 1462515998, -->

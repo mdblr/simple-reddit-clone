@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 1vh 1vw;
+  display: flex;
+}
+
+.r {
+  display: flex;
+  flex-direction: row;
+}
+
+.c {
+  display: flex;
+  flex-direction: column;
+}
+
+.baseLine {
+  align-items: baseline;
+}
+
+img {
+  height: 150px;
+}
+
+.desc {
+  width: 50vw;
+}
+
+.center {
+  justify-content: center;
+}

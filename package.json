@@ -1,0 +1,22 @@
+{
+  "name": "reddit_clone",
+  "version": "1.0.0",
+  "description": "simple reddit clone",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -a 0.0.0.0 -p 8000"
+  },
+  "author": "thedobblereffect",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "bootstrap": "^3.3.6",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "^1.0.2",
+    "moment": "^2.13.0",
+    "requirejs": "^2.2.0"
+  }
+}
