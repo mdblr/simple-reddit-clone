@@ -28,6 +28,7 @@ header {
 
 .breakWord {
   word-wrap: break-word;;
+  max-width: 550px;
 }
 
 .centerLine {
@@ -76,10 +77,6 @@ a, #newPost .btn, .btn, small, input {
 #voter {
   margin-left: 6px;
 }
-
-/*#voter a {
-  margin: 10px;
-}*/
 
 .reverseRow {
   flex-direction: row-reverse;
