@@ -91,8 +91,8 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
     var Comment = function(newComment) {
       var timestamp = Date.now();
       this.author = newComment.author;
-      this.comment = newComment.comments;
-      this.time= Date.now();
+      this.comment = newComment.comment;
+      this.time= moment().calendar(null, calendarParameters);
       this.vote= 0;
       this.id = Math.random()*1000000+timestamp;
     }
@@ -108,6 +108,7 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
     }
 
     $scope.postComment = function(post, newComment) {
+      console.log(newComment);
       post.comments.push(new Comment(newComment));
     };
 
