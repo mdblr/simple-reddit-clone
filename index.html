@@ -13,12 +13,10 @@
   </head>
   <body ng-controller='loadPageCtrl'>
 
-
-    <main class='c container'>
-      <header class=' r centerLine spaceBetween'>
-
-        <div class='c pull-left'>
-          <input placeholder='search' ng-model='search' />
+    <div class='r container reverseRow'>
+      <header>
+        <div class='c spaceBetween'>
+          <input class='smMargin' placeholder='search' ng-model='search' />
 
           <select ng-model='orderProp'>
             <option value='sort'>sort posts</option>
@@ -27,103 +25,110 @@
           </select>
         </div>
 
-
-
-        <a href='#' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+        <div>
+          <a href='#newPost' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+        </div>
       </header>
-      <post class='post' ng-repeat='post in posts | orderBy: orderProp | filter: search'>
-        <section class='r centerLine'>
-          <post-image class='col-md-2'>
-            <img class='pull-right' ng-src='{{post.img}}' />
-          </post-image>
+      <section class='c col-md-9'>
+        <main class='post' ng-repeat='post in posts | orderBy: orderProp | filter: search'>
+          <section class='r centerLine'>
 
+            <img ng-src='{{post.img}}' />
 
-          <section class='c centerLine'>
-            <post class=''>
-              <h3>{{post.title}} <br /> <small>posted {{post.date[1]}}</small></h3>
-              <p id='epoch'>{{post.date[0]}}</p>
-              <p class="desc">{{post.description}}</p>
-            </post>
+            <section class='c'>
+              <post>
+                <h3>{{post.title}} <br /> <small>posted {{post.date[1]}}</small></h3>
+                <p id='epoch'>{{post.date[0]}}</p>
+                <p>"{{post.description}}"</p>
+              </post>
 
-
+            </section>
           </section>
-          <post-votes class='c'>
-            <h4 class='centerLine'>votes: {{post.vote}} </h4>
-              <aside class='r'>
-                <button class='btn btn-default' type="button" name="button" ng-click='vote(post, "up")'>UpVote</button>
-                <button class='btn btn-default' type="button" name="button" ng-click='vote(post, "down")'>DownVote</button>
-              </aside>
-          </post-votes>
+
+          <div>
+            <footer class='r spaceBetween reverseRow col-md-offset-3'>
+              <section>
+                <a href='#' ng-click='showComments=!showComments'>
+                  <ng-pluralize count='post.comments.length' when="{
+                    '0': 'No comments',
+                    '1': '{{post.comments.length}} comment',
+                    'other': '{{post.comments.length}} comments'
+                    }">
+                  </ng-pluralize>
+                </a>
+              </section>
+              <section>
+                <a href='#' ng-click='commentForm=!commentForm'>new comment</a>
+              </section>
+
+              <votes class='r centerLine'>
+                <main>[ votes: {{post.vote}} ]</main>
+                <aside id='voter'>
+                  <a href='#' ng-click='vote(post, "up")'>up</a> /
+                  <a href='#' ng-click='vote(post, "down")'>down</a>
+                </aside>
+              </votes>
+            </footer>
+
+            <section ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
+
+              <div class='r spaceBetween reverseRow col-md-offset-3'>
+                <aside class='c col-md-3'>
+                  <main>[votes: {{ comment.vote }}]</main>
+                  <aside>
+                    <a href='#' ng-click='vote(comment, "up")'>up</a> /
+                    <a href='#' ng-click='vote(comment, "down")'>down</a>
+                  </aside>
+                </aside>
+                <main class='col-md-6 breakWord'>
+                  {{comment.comment}}
+                </main>
+                <aside class='col-md-3 breakWord'>{{comment.author}}: <br /> {{comment.time}} </aside>
+              </div>
+
+            </section>
+
+            <new-comment-form>
+              <form name='thisForm' ng-show='commentForm' class=' hiddenForm comments'>
+                <div>
+                  <h4>name (required)</h4>
+                  <input ng-model="newComment.author" required />
+                </div>
+                <div>
+                  <h4>comment (required)</h4>
+                  <textarea type='text' ng-model="newComment.comment" required></textarea>
+                </div>
+                <input type="submit" ng-click='postComment(post, newComment)'/>
+              </form>
+            </new-comment-form>
+          </div>
+        </main>
+
+        <a href='#newPost' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+        <section>
+          <form id='newPost' name='createPost' ng-show='hidePostForm' class='hiddenForm r' >
+            <section class='c'>
+              <input class='btn btn-sm btn-danger smMargin' type="submit" ng-click='postPost(newPost)'/>
+              <a class='btn btn-sm btn-primary smMargin' ng-click='hidePostForm=!hidePostForm'>Cancel</a>
+            </section>
+            <section class='c col-md-3'>
+
+              <div>
+                <input ng-model="newPost.title"  placeholder='title (required)' required />
+              </div>
+              <div>
+                <input placeholder='image url (required)' ng-model="newPost.img" required />
+              </div>
+              <div>
+                <textarea type='text' cols='80' rows='10' ng-model="newPost.description" placeholder='write stuff' required></textarea>
+              </div>
+
+            </section>
+
+          </form>
         </section>
-
-        <aside class='col-md-offset-2'>
-          <comment-header class='r centerLine'>
-            <section>
-              <a href='#' ng-click='showComments=!showComments'>
-
-                <ng-pluralize count='post.comments.length' when="{
-                  '0': 'No comments',
-                  '1': '{{post.comments.length}} comment',
-                  'other': '{{post.comments.length}} comments'
-                  }">
-                </ng-pluralize>
-              </a>
-            </section>
-
-            <section class='col-md-offset-1'>
-              <a href='#' ng-click='commentForm=!commentForm'>new comment</a>
-            </section>
-          </comment-header>
-
-          <comments ng-show='showComments' class='comments' ng-repeat='comment in post.comments'>
-            <published-comments class='r centerLine'>
-              <user-data>{{comment.author}}: <br /> {{comment.time}} </user-data>
-              <user-comment class='col-md-offset-1 col-md-4'>
-                {{comment.comment}}
-              </user-comment>
-              <div class='col-md-offset-1'>
-                <h4 class='votes'>votes: {{ comment.vote }}</h4>
-                <button class='btn btn-sm btn-default' type="button" ng-click='vote(comment, "up")'>up</button>
-                <button class='btn btn-sm btn-default' type="button" ng-click='vote(comment, "down")'>down</button>
-              </div>
-            </published-comments>
-          </comments>
-          <new-comment-form>
-            <form name='thisForm' ng-show='commentForm' class='comments'>
-              <div>
-                <h4>name (required)</h4>
-                <input ng-model="newComment.author" required />
-              </div>
-              <div>
-                <h4>comment (required)</h4>
-                <textarea type='text' ng-model="newComment.comment" required></textarea>
-              </div>
-              <input type="submit" ng-click='postComment(post, newComment)'/>
-            </form>
-          </new-comment-form>
-        </aside>
-      </post>
-
-      <a href='#' ng-click='hidePostForm=!hidePostForm'>New Post</a>
-      <new-post-form class='c'>
-        <form name='createPost' ng-show='hidePostForm' class='hide'>
-          <div>
-            <h4>Title (required)</h4>
-            <input ng-model="newPost.title" required />
-          </div>
-          <div>
-            <h4> Write stuff (required)</h4>
-            <textarea type='text' ng-model="newPost.description" required></textarea>
-          </div>
-          <div>
-            <h4>Image URL (required)</h4>
-            <input ng-model="newPost.img" required />
-          </div>
-          <input type="submit" ng-click='postPost(newPost)'/>
-        </form>
-      </new-post-form>
-
-    </main>
+      </section>
+    </div>
 
   </body>
 </html>
