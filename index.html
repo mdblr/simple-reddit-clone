@@ -57,7 +57,7 @@
                 </a>
               </section>
               <section>
-                <a href='#' ng-click='commentForm=!commentForm'>new comment</a>
+                <a href='#{{post.id}}' ng-click='commentForm=!commentForm'>new comment</a>
               </section>
 
               <votes class='r centerLine'>
@@ -87,7 +87,7 @@
 
             </section>
 
-            <new-comment-form>
+            <section id='{{post.id}}'>
               <form name='thisForm' ng-show='commentForm' class=' hiddenForm comments'>
                 <div>
                   <h4>name (required)</h4>
@@ -99,7 +99,7 @@
                 </div>
                 <input type="submit" ng-click='postComment(post, newComment)'/>
               </form>
-            </new-comment-form>
+            </section>
           </div>
         </main>
 
