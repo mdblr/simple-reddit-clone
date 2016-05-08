@@ -8,17 +8,17 @@ body {
 }
 
 .r {
-  display: flex;
+  display: flex !important;
   flex-direction: row;
 }
 
 .c {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
 }
 
 .centerLine {
-  align-items: center;
+  align-items: center !important;
 }
 
 .spaceBetween {
@@ -34,9 +34,36 @@ img {
 }
 
 .center {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 #epoch {
   display: none;
+}
+
+.r.ng-enter {
+  transition: 1s linear all;
+  opacity: 0;
+}
+
+.r.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.comments.ng-hide {
+  transition:0.2s linear all;
+  opacity:0;
+}
+
+.comments {
+  transition: .4s linear all;
+  opacity:1;
+}
+
+.comments {
+  margin: 10px 0 10px 0; 
+}
+
+.post {
+  margin: 10px 0 10px 0;
 }

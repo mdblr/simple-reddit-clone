@@ -8,7 +8,7 @@
     <script type="text/javascript" src='js/app.js'></script>
     <script type="text/javascript" src='js/controllers.js'></script>
     <script type="text/javascript" src='node_modules/moment/moment.js'></script>
-    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body class='c' ng-controller='loadPageCtrl'>
@@ -29,11 +29,14 @@
       <a href='#' ng-click='hidePostForm=!hidePostForm'>New Post</a>
     </header>
 
-    <main class='c'>
+    <main class='c container'>
 
-      <section  ng-repeat='post in posts | orderBy: orderProp | filter: search'>
+      <post class='post' ng-repeat='post in posts | orderBy: orderProp | filter: search'>
         <div class='r'>
-          <img ng-src='{{post.img}}' />
+          <div class='col-md-2'>
+            <img class='pull-right' ng-src='{{post.img}}' />
+          </div>
+
 
           <section class='c'>
 
@@ -46,37 +49,38 @@
 
             <comment-header class='r centerLine'>
 
-              <a href='#' ng-click='showComments=!showComments'><h3> show comments</h3></a>
-              <pre>
+              <a href='#' ng-click='showComments=!showComments'>
+
                 <ng-pluralize count='post.comments.length' when="{
                   '0': 'No comments',
                   '1': '{{post.comments.length}} comment',
                   'other': '{{post.comments.length}} comments'
                   }">
                 </ng-pluralize>
-              </pre>
+              </a>
 
             </comment-header>
-              <section ng-show='showComments'>
+              <section ng-show='showComments' class='comments'>
                 <comments ng-repeat='comment in post.comments'>
                   <published-comments class='r'>
-                    <div class='c'>
-                      {{comment.author}}
-                      <br />
-                      {{comment.comment}}
-                      <br />
-                      {{comment.time}}
+                    <div class='c col-md-4'>
+                      <p>
+                        {{comment.comment}}
+                        <h5>{{comment.author}}</h5>
+                      </p>
+                      <p>{{comment.time}}  </p>
+
                     </div>
                     <div>
                       <h4>votes: {{ comment.vote }}</h4>
-                      <button type="button" ng-click='vote(comment, "up")'>up</button>
-                      <button type="button" ng-click='vote(comment, "down")'>down</button>
+                      <button class='btn btn-default' type="button" ng-click='vote(comment, "up")'>up</button>
+                      <button class='btn  btn-default' type="button" ng-click='vote(comment, "down")'>down</button>
                     </div>
                   </published-comments>
                 </comments>
                 <new-comment-form>
                   <a href='#' ng-click='commentForm=!commentForm'>comment</a>
-                  <form name='thisForm' ng-show='commentForm'>
+                  <form name='thisForm' ng-show='commentForm' class='comments'>
                     <div>
                       <h4>name (required)</h4>
                       <input ng-model="newComment.author" required />
@@ -95,16 +99,16 @@
           <section class='c'>
             <h4 class='centerLine'>votes: {{post.vote}} </h4>
               <aside class='r'>
-                <button type="button" name="button" ng-click='vote(post, "up")'>UpVote</button>
-                <button type="button" name="button" ng-click='vote(post, "down")'>DownVote</button>
+                <button class='btn btn-default' type="button" name="button" ng-click='vote(post, "up")'>UpVote</button>
+                <button class='btn btn-default' type="button" name="button" ng-click='vote(post, "down")'>DownVote</button>
               </aside>
           </section>
         </div>
-      </section>
+      </post>
 
       <a href='#' ng-click='hidePostForm=!hidePostForm'>New Post</a>
       <new-post-form class='c'>
-        <form name='createPost' ng-show='hidePostForm'>
+        <form name='createPost' ng-show='hidePostForm' class='hide'>
           <div>
             <h4>Title (required)</h4>
             <input ng-model="newPost.title" required />
@@ -125,13 +129,3 @@
 
   </body>
 </html>
-
-
-
-<!-- id: 0,
-title: 'the best Jimmy Eat World song',
-author: 'Erica Surrey',
-image: 'http://i.imgur.com/C3WIWj8.jpg',
-description: "On sleepless roads, the sleepless go. Then be happy with the consequence. Don't think we're not serious. woh oh oh oh oh oh. Get out of this place while we still have time. I won't always love these selfish things. woh oh oh oh oh oh. No one else will know these lonely dreams. Clear your thoughts with speyside. That once we said goodbye. I felt for sure last night. If you only once would let me. (string from your tether unwinds). (when words lose their meaning). Our coal",
-votes: 4,
-date: 1462515998, -->
