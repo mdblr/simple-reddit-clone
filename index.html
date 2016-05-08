@@ -32,16 +32,18 @@
       <section class='c col-md-9'>
         <main class='post' ng-repeat='post in posts | orderBy: orderProp | filter: search'>
           <section class='r centerLine'>
+            <aside>
+              <img ng-src='{{post.img}}' />
+            </aside>
 
-            <img ng-src='{{post.img}}' />
 
-            <section class='c'>
+            <main class='c'>
               <post>
                 <h3>{{post.title}} <br /> <small>posted {{post.date[1]}}</small></h3>
                 <p id='epoch'>{{post.date[0]}}</p>
                 <p class='breakWord'>"{{post.description}}"</p>
               </post>
-            </section>
+            </main>
           </section>
 
           <div>
@@ -69,23 +71,28 @@
               </votes>
             </footer>
 
-            <section ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
-
-              <div class='r spaceBetween reverseRow col-md-offset-3'>
-                <aside class='c col-md-3'>
-                  <main>[votes: {{ comment.vote }}]</main>
-                  <aside>
-                    <a href='#' ng-click='vote(comment, "up")'>up</a> /
-                    <a href='#' ng-click='vote(comment, "down")'>down</a>
+            <ul>
+              <li ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
+                <div id='commmentVotes' class='r'>
+                  <aside class='c col-md-3'>
+                    <h6>[votes: {{ comment.vote }}]</h6>
+                    <aside>
+                      <a href='' ng-click='vote(comment, "up")'>up</a> /
+                      <a href='' ng-click='vote(comment, "down")'>down</a>
+                    </aside>
                   </aside>
-                </aside>
-                <main class='col-md-6 breakWord'>
-                  {{comment.comment}}
-                </main>
-                <aside class='col-md-3 breakWord'>{{comment.author}}: <br /> {{comment.time}} </aside>
-              </div>
+                  <main class='breakWord'>
+                    <h5>{{comment.author}}</h5>
+                    <main class='breakWord'>
+                      "{{comment.comment}}"
+                    </main>
+                    <h4><small>{{comment.time}}</small></h4>
+                  </main>
 
-            </section>
+                </div>
+              </li>
+            </ul>
+
 
             <section id='{{post.id}}'>
               <form name='thisForm' ng-show='commentForm' class=' hiddenForm comments'>

@@ -10,8 +10,28 @@ header {
   margin: 2vh 0 1vh 0;
 }
 
-.smMargin {
-  margin: 2px;
+img {
+  margin-right: 20px;
+  max-width: 170px;
+}
+
+ul {
+  list-style: none;
+}
+
+#voter {
+  margin-left: 6px;
+}
+#epoch {
+  display: none;
+}
+
+#newPost {
+  margin: 3vh 2vw 4vh 0vw;
+}
+
+#commmentVotes {
+  margin-top: 2vw;
 }
 
 .r {
@@ -23,12 +43,10 @@ header {
 .c {
   display: flex;
   flex-direction: column;
-
 }
 
-.breakWord {
-  word-wrap: break-word;;
-  max-width: 550px;
+.reverseRow {
+  flex-direction: row-reverse;
 }
 
 .centerLine {
@@ -39,17 +57,13 @@ header {
   justify-content: space-between;
 }
 
-img {
-  margin-right: 20px;
-  max-width: 170px;
+.breakWord {
+  word-wrap: break-word;;
+  max-width: 550px;
 }
 
-#epoch {
-  display: none;
-}
-
-#newPost {
-  margin: 3vh 2vw 4vh 0vw;
+.smMargin {
+  margin: 2px;
 }
 
 .hiddenForm.ng-hide {
@@ -62,22 +76,14 @@ img {
   opacity:1;
 }
 
-.comments {
-  margin: 10px 0 10px 0;
-}
-
-.post {
-  margin: 10px 0 10px 0;
-}
-
 a, #newPost .btn, .btn, small, input {
   font-family: monospace !important;
 }
 
-#voter {
-  margin-left: 6px;
+.comments {
+  margin: 20px 0 20px 0;
 }
 
-.reverseRow {
-  flex-direction: row-reverse;
+.post {
+  margin: 10px 0 10px 0;
 }
