@@ -88,23 +88,32 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
     $scope.hidePostForm = false;
     $scope.newComment = {};
 
-    $scope.postComment = function(post, newComment) {
+    var Comment = function(newComment) {
       var timestamp = Date.now();
-      $scope.newComment.time = moment().calendar(null, calendarParameters);
-      $scope.newComment.vote = 0;
-      $scope.newComment.id = ((Math.random()*1000000)+timestamp);
-      post.comments.push(newComment);
+      this.author = newComment.author;
+      this.comment = newComment.comments;
+      this.time= Date.now();
+      this.vote= 0;
+      this.id = Math.random()*1000000+timestamp;
+    }
+
+    var Post = function(newPost) {
+      this.author = 'tupac';
+      this.title = newPost.title;
+      this.description = newPost.description;
+      this.img = newPost.img;
+      this.date = [new Date(), moment().calendar(null, calendarParameters)];
+      this.vote= 0;
+      this.comments = [];
+    }
+
+    $scope.postComment = function(post, newComment) {
+      post.comments.push(new Comment(newComment));
     };
 
     $scope.newPost = {};
     $scope.postPost = function(newPost) {
-      var timestamp = moment().calendar;
-      $scope.newPost.author = 'tupac';
-      $scope.newPost.date = [new Date(), moment().calendar(null, calendarParameters)];
-      $scope.newPost.vote = 0;
-      $scope.newPost.id = ((Math.random()*1000000)+timestamp);
-      console.log($scope.newPost)
-      $scope.posts.push(newPost);
+      $scope.posts.push(new Post(newPost));
     }
 
   }]);
