@@ -31,7 +31,7 @@ ul {
 }
 
 #commmentVotes {
-  margin-top: 2vw;
+  margin-top: 1vw;
 }
 
 .r {
@@ -76,7 +76,7 @@ ul {
   opacity:1;
 }
 
-a, #newPost .btn, .btn, small, input {
+a, #newPost .btn, .btn, small, input, textarea {
   font-family: monospace !important;
 }
 

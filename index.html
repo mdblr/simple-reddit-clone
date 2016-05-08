@@ -47,7 +47,12 @@
           </section>
 
           <div>
-            <footer class='r spaceBetween reverseRow col-md-offset-3'>
+            <footer class='r spaceBetween col-md-offset-3 centerLine'>
+
+              <section>
+                <a href='#{{post.id}}' ng-click='commentForm=!commentForm'>new comment</a>
+              </section>
+
               <section>
                 <a href='#' ng-click='showComments=!showComments'>
                   <ng-pluralize count='post.comments.length' when="{
@@ -58,17 +63,14 @@
                   </ng-pluralize>
                 </a>
               </section>
-              <section>
-                <a href='#{{post.id}}' ng-click='commentForm=!commentForm'>new comment</a>
-              </section>
 
-              <votes class='r centerLine'>
-                <main>[ votes: {{post.vote}} ]</main>
+              <section class='r centerLine'>
+                <main><h5>[ votes: {{post.vote}} ] &nbsp; </h5></main>
                 <aside id='voter'>
                   <a href='#' ng-click='vote(post, "up")'>up</a> /
                   <a href='#' ng-click='vote(post, "down")'>down</a>
                 </aside>
-              </votes>
+              </section>
             </footer>
 
             <ul>
@@ -88,23 +90,23 @@
                     </main>
                     <h4><small>{{comment.time}}</small></h4>
                   </main>
-
                 </div>
               </li>
             </ul>
 
+            <section id='{{post.id}}' class='centerLine'>
+              <aside ng-show='commentForm'>
+                <h4>add comment</h4>
+              </aside>
 
-            <section id='{{post.id}}'>
-              <form name='thisForm' ng-show='commentForm' class=' hiddenForm comments'>
-                <div>
-                  <h4>name (required)</h4>
-                  <input ng-model="newComment.author" required />
+              <form name='addComments' ng-show='commentForm' class=' hiddenForm comments'>
+                <div class='form-group'>
+                  <input ng-model="newComment.author" placeholder='who you are' required />
                 </div>
-                <div>
-                  <h4>comment (required)</h4>
-                  <textarea type='text' ng-model="newComment.comment" required></textarea>
+                <div class='form-group'>
+                  <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' required></textarea>
                 </div>
-                <input type="submit" ng-click='postComment(post, newComment)'/>
+                <input type="submit" class='btn' ng-click='postComment(post, newComment)'/>
               </form>
             </section>
           </div>
