@@ -3,9 +3,9 @@
 }
 
 body {
-  padding: 1vh 1vw;
   display: flex;
 }
+
 
 .r {
   display: flex !important;
@@ -21,12 +21,12 @@ body {
   align-items: center !important;
 }
 
-.spaceBetween {
+/*.spaceBetween {
   justify-content: space-between;
-}
+}*/
 
 img {
-  height: 150px;
+  max-width: 170px;
 }
 
 .desc {
@@ -61,9 +61,18 @@ img {
 }
 
 .comments {
-  margin: 10px 0 10px 0; 
+  margin: 10px 0 10px 0;
 }
 
 .post {
   margin: 10px 0 10px 0;
+}
+
+.votes.ng-enter {
+  transition: .4s linear all;
+  color: black;
+}
+
+.votes.ng-enter.ng-enter-active {
+  color: red;
 }

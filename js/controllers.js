@@ -6,15 +6,13 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
 
   function($scope) {
 
-    $scope.orderProp = '-vote';
+    $scope.orderProp = 'sort';
 
     var calendarParameters = {
-      sameDay: '[Today] MM/DD/YYYY',
-      nextDay: '[Tomorrow] MM/DD/YYYY',
-      nextWeek: 'dddd',
-      lastDay: '[Yesterday] MM/DD/YYYY',
-      lastWeek: '[Last] dddd',
-      sameElse: 'MM/DD/YYYY'
+      sameDay: '[today] MM/DD/YYYY',
+      lastDay: '[yesterday] MM/DD/YYYY',
+      lastWeek: '[last] dddd',
+      sameElse: 'on MM/DD/YYYY'
     }
 
     $scope.vote = function(post, dir) {
