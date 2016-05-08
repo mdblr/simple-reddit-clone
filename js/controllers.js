@@ -108,11 +108,9 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
     }
 
     $scope.postComment = function(post, newComment) {
-      console.log(newComment);
       post.comments.push(new Comment(newComment));
     };
 
-    $scope.newPost = {};
     $scope.postPost = function(newPost) {
       $scope.posts.push(new Post(newPost));
     }
