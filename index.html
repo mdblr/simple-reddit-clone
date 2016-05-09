@@ -16,9 +16,10 @@
     <div class='r container reverseRow'>
       <header>
         <div class='c spaceBetween'>
-          <input class='smMargin' placeholder='search' ng-model='search' />
+          <h6 class='text-primary'>angular intro with simple reddit clone</h6>
+          <input class='form-group' placeholder='search' ng-model='search' />
 
-          <select ng-model='orderProp'>
+          <select class='form-group' ng-model='orderProp'>
             <option value='sort'>sort posts</option>
             <option value='-vote'>by rating</option>
             <option value='-date[0]'>by newest</option>
@@ -26,7 +27,7 @@
         </div>
 
         <div>
-          <a href='#newPost' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+          <a href='#newPost' class='pull-right' ng-click='hidePostForm=!hidePostForm'>New Post</a>
         </div>
       </header>
       <section class='c col-md-9'>
@@ -47,68 +48,71 @@
           </section>
 
           <div>
-            <footer class='r spaceBetween col-md-offset-3 centerLine'>
-
-              <section>
-                <a href='#{{post.id}}' ng-click='commentForm=!commentForm'>new comment</a>
-              </section>
-
-              <section>
-                <a href='#' ng-click='showComments=!showComments'>
-                  <ng-pluralize count='post.comments.length' when="{
-                    '0': 'No comments',
-                    '1': '{{post.comments.length}} comment',
-                    'other': '{{post.comments.length}} comments'
-                    }">
-                  </ng-pluralize>
-                </a>
-              </section>
-
-              <section class='r centerLine'>
-                <main><h5>[ votes: {{post.vote}} ] &nbsp; </h5></main>
-                <aside id='voter'>
-                  <a href='#' ng-click='vote(post, "up")'>up</a> /
-                  <a href='#' ng-click='vote(post, "down")'>down</a>
+            <footer class='r'>
+              <div class="c">
+                <aside class='r centerLine'>
+                  <section><h5>[ votes: {{post.vote}} ] &nbsp; </h5></section>
+                  <section id='voter'>
+                    <a href='#' ng-click='vote(post, "up")'>up</a> /
+                    <a href='#' ng-click='vote(post, "down")'>down</a>
+                  </section>
                 </aside>
-              </section>
-            </footer>
 
-            <ul>
-              <li ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
-                <div id='commmentVotes' class='r'>
-                  <aside class='c col-md-3'>
-                    <h6>[votes: {{ comment.vote }}]</h6>
-                    <aside>
-                      <a href='' ng-click='vote(comment, "up")'>up</a> /
-                      <a href='' ng-click='vote(comment, "down")'>down</a>
-                    </aside>
-                  </aside>
-                  <main class='breakWord'>
-                    <h5>{{comment.author}}</h5>
-                    <main class='breakWord'>
-                      "{{comment.comment}}"
-                    </main>
-                    <h4><small>{{comment.time}}</small></h4>
-                  </main>
-                </div>
-              </li>
-            </ul>
+                <main id='postInfoAside' class='r'>
+                  <section>
+                    <a href='#' ng-click='showComments=!showComments'>
+                      <ng-pluralize count='post.comments.length' when="{
+                        '0': 'No comments',
+                        '1': '{{post.comments.length}} comment',
+                        'other': '{{post.comments.length}} comments'
+                        }">
+                      </ng-pluralize>
+                    </a>
+                  </section>
+                  &nbsp;/&nbsp;
+                  <section>
+                    <a href='#{{post.id}}' ng-click='commentForm=!commentForm'>add comment</a>
+                  </section>
+                </main>
 
-            <section id='{{post.id}}' class='centerLine'>
-              <aside ng-show='commentForm'>
-                <h4>add comment</h4>
+                <ul>
+                  <li ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
+                    <div class='r'>
+                      <aside class='c commentsBuffer'>
+                        <h6>[votes: {{ comment.vote }}]</h6>
+                        <aside>
+                          <a href='' ng-click='vote(comment, "up")'>up</a> /
+                          <a href='' ng-click='vote(comment, "down")'>down</a>
+                        </aside>
+                      </aside>
+                      <main class='breakWord'>
+                        <h5>{{comment.author}}</h5>
+                        <main class='breakWord'>
+                          "{{comment.comment}}"
+                        </main>
+                        <h4><small>{{comment.time}}</small></h4>
+                      </main>
+                    </div>
+                  </li>
+                </ul>
+
+                <section id='{{post.id}}' class='centerLine'>
+                  <h4 ng-show='commentForm'>add comment</h4>
+                  <form name='addComments' ng-show='commentForm' class=' hiddenForm comments'>
+                    <div class='form-group'>
+                      <input ng-model="newComment.author" placeholder='who you are' required />
+                    </div>
+                    <div class='form-group'>
+                      <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' required></textarea>
+                    </div>
+                    <input type="submit" class='btn' ng-click='postComment(post, newComment)'/>
+                  </form>
+                </section>
               </aside>
 
-              <form name='addComments' ng-show='commentForm' class=' hiddenForm comments'>
-                <div class='form-group'>
-                  <input ng-model="newComment.author" placeholder='who you are' required />
-                </div>
-                <div class='form-group'>
-                  <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' required></textarea>
-                </div>
-                <input type="submit" class='btn' ng-click='postComment(post, newComment)'/>
-              </form>
-            </section>
+              </div>
+
+            </footer>
           </div>
         </main>
 
@@ -116,8 +120,8 @@
         <section>
           <form id='newPost' name='createPost' ng-show='hidePostForm' class='hiddenForm r' >
             <section class='c'>
-              <input class='btn btn-sm btn-danger smMargin' type="submit" ng-click='postPost(newPost)'/>
-              <a class='btn btn-sm btn-primary smMargin' ng-click='hidePostForm=!hidePostForm'>Cancel</a>
+              <input class='btn btn-sm btn-danger' type="submit" ng-click='postPost(newPost)'/>
+              <a class='btn btn-sm btn-primary' ng-click='hidePostForm=!hidePostForm'>Cancel</a>
             </section>
             <section class='c col-md-3'>
 

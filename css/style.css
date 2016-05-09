@@ -34,6 +34,14 @@ ul {
   margin-top: 1vw;
 }
 
+#postInfoAside {
+  min-width: 190px;
+}
+
+.commentsBuffer {
+  margin-right: 85px;
+}
+
 .r {
   display: flex;
   flex-direction: row;
@@ -60,10 +68,6 @@ ul {
 .breakWord {
   word-wrap: break-word;;
   max-width: 550px;
-}
-
-.smMargin {
-  margin: 2px;
 }
 
 .hiddenForm.ng-hide {
