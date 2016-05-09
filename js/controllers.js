@@ -9,9 +9,9 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
     $scope.orderProp = 'sort';
 
     var calendarParameters = {
-      sameDay: '[today] MM/DD/YYYY',
-      lastDay: '[yesterday] MM/DD/YYYY',
-      lastWeek: '[last] dddd',
+      sameDay: '[today] @ h:mm:ss a',
+      lastDay: '[yesterday] @ h:mm:ss a',
+      lastWeek: '[last] dddd MM/DD/YYYY',
       sameElse: 'on MM/DD/YYYY'
     }
 
