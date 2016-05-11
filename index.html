@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body ng-controller='loadPageCtrl'>
+  <body ng-controller='loadPageCtrl as home'>
 
     <div class='r container reverseRow'>
       <header>
         <div class='c spaceBetween'>
           <h6 class='text-primary'>angular intro with simple reddit clone</h6>
-          <input class='form-group' placeholder='search' ng-model='search' />
+          <input class='form-group' placeholder='search' ng-model='home.search' />
 
-          <select class='form-group' ng-model='orderProp'>
+          <select class='form-group' ng-model='app.orderProp'>
             <option value='sort'>sort posts</option>
             <option value='-vote'>by rating</option>
             <option value='-date[0]'>by newest</option>
@@ -27,11 +27,11 @@
         </div>
 
         <div>
-          <a href='#newPost' class='pull-right' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+          <a href='#newPost' class='pull-right' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
         </div>
       </header>
       <section class='c col-md-9'>
-        <main class='post' ng-repeat='post in posts | orderBy: orderProp | filter: search'>
+        <main class='post' ng-repeat='post in home.posts | orderBy: home.orderProp | filter: home.search'>
           <section class='r centerLine'>
             <aside>
               <img ng-src='{{post.img}}' />
@@ -53,14 +53,14 @@
                 <aside class='r centerLine'>
                   <section><h5>[ votes: {{post.vote}} ] &nbsp; </h5></section>
                   <section id='voter'>
-                    <a href='#' ng-click='vote(post, "up")'>up</a> /
-                    <a href='#' ng-click='vote(post, "down")'>down</a>
+                    <a href='#' ng-click='home.vote(post, "up")'>up</a> /
+                    <a href='#' ng-click='home.vote(post, "down")'>down</a>
                   </section>
                 </aside>
 
                 <main id='postInfoAside' class='r'>
                   <section>
-                    <a href='#' ng-click='showComments=!showComments'>
+                    <a href='#' ng-click='home.showComments=!home.showComments'>
                       <ng-pluralize count='post.comments.length' when="{
                         '0': 'No comments',
                         '1': '{{post.comments.length}} comment',
@@ -71,18 +71,18 @@
                   </section>
                   &nbsp;/&nbsp;
                   <section>
-                    <a href='' ng-click='commentForm=!commentForm'>add comment</a>
+                    <a href='' ng-click='home.commentForm=!home.commentForm'>add comment</a>
                   </section>
                 </main>
 
                 <ul>
-                  <li ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
+                  <li ng-show='home.showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
                     <div class='r'>
                       <aside class='c commentsBuffer'>
                         <h6>[votes: {{ comment.vote }}]</h6>
                         <aside>
-                          <a href='' ng-click='vote(comment, "up")'>up</a> /
-                          <a href='' ng-click='vote(comment, "down")'>down</a>
+                          <a href='' ng-click='home.vote(comment, "up")'>up</a> /
+                          <a href='' ng-click='home.vote(comment, "down")'>down</a>
                         </aside>
                       </aside>
                       <main class='breakWord'>
@@ -97,15 +97,15 @@
                 </ul>
 
                 <section id='{{post.id}}' class='centerLine'>
-                  <h4 ng-show='commentForm'>add comment</h4>
-                  <form name='addComments' ng-show='commentForm' class=' hiddenForm comments' novalidate>
+                  <h4 ng-show='home.commentForm'>add comment</h4>
+                  <form name='addComments' ng-show='home.commentForm' class=' hiddenForm comments' novalidate>
                     <div class='form-group'>
-                      <input ng-model="newComment.author" placeholder='who you are' />
+                      <input ng-model="home.newComment.author" placeholder='who you are' />
                     </div>
                     <div class='form-group'>
-                      <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' ></textarea>
+                      <textarea type='text' ng-model="home.newComment.comment" cols='35' rows='5' placeholder='write stuff' ></textarea>
                     </div>
-                    <input type="submit" class='btn' ng-click='postComment(post, newComment)'/>
+                    <input type="submit" class='btn' ng-click='home.postComment(post, newComment)'/>
                   </form>
                 </section>
               </aside>
@@ -116,23 +116,23 @@
           </div>
         </main>
 
-        <a href='#newPost' ng-click='hidePostForm=!hidePostForm'>New Post</a>
+        <a href='#newPost' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
         <section>
-          <form id='newPost' name='createPost' ng-show='hidePostForm' class='hiddenForm r' >
+          <form id='newPost' name='createPost' ng-show='home.hidePostForm' class='hiddenForm r' >
             <section class='c'>
-              <input class='btn btn-sm btn-danger' type="submit" ng-click='postPost(newPost)'/>
-              <a class='btn btn-sm btn-primary' ng-click='hidePostForm=!hidePostForm'>Cancel</a>
+              <input class='btn btn-sm btn-danger' type="submit" ng-click='home.postPost(newPost)'/>
+              <a class='btn btn-sm btn-primary' ng-click='home.hidePostForm=!home.hidePostForm'>Cancel</a>
             </section>
             <section class='c col-md-3'>
 
               <div>
-                <input ng-model="newPost.title"  placeholder='title (required)' required />
+                <input ng-model="home.newPost.title"  placeholder='title (required)' required />
               </div>
               <div>
-                <input placeholder='image url (required)' ng-model="newPost.img" required />
+                <input placeholder='image url (required)' ng-model="home.newPost.img" required />
               </div>
               <div>
-                <textarea type='text' cols='80' rows='10' ng-model="newPost.description" placeholder='write stuff' required></textarea>
+                <textarea type='text' cols='80' rows='10' ng-model="home.newPost.description" placeholder='write stuff' required></textarea>
               </div>
 
             </section>
