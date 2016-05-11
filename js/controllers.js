@@ -1,24 +1,31 @@
 'use strict';
 
-var redditCloneCtrl = angular.module('redditCloneCtrl', []);
+angular
+  .module('simpleRedditClone')
+  .controller('loadPageCtrl', loadPageCtrl);
 
-redditCloneCtrl.controller('loadPageCtrl', loadPageCtrl);
+// var redditCloneCtrl = angular.module('redditCloneCtrl', []);
+//
+// redditCloneCtrl.controller('loadPageCtrl', loadPageCtrl);
 
-var loadPageCtrl = function() {
+
+function loadPageCtrl($scope) {
 
   var vm = this;
-
   vm.orderProp = 'sort';
+  vm.vote = function(post, dir) {
+    dir === 'up' ? post.vote +=1 : post.vote -=1 ;
+  }
+  vm.showComments = false;
+  vm.commentForm = false;
+  vm.hidePostForm = false;
+  vm.newComment = {};
 
   var calendarParameters = {
     sameDay: '[today] @ h:mm:ss a',
     lastDay: '[yesterday] @ h:mm:ss a',
     lastWeek: '[last] dddd MM/DD/YYYY',
     sameElse: 'on MM/DD/YYYY'
-  }
-
-  vm.vote = function(post, dir) {
-    dir === 'up' ? post.vote +=1 : post.vote -=1 ;
   }
 
   vm.posts = [
@@ -85,11 +92,6 @@ var loadPageCtrl = function() {
     }
   ];
 
-  vm.showComments = false;
-  vm.commentForm = false;
-  vm.hidePostForm = false;
-  vm.newComment = {};
-
   var Comment = function(newComment) {
     var timestamp = Date.now();
     this.author = newComment.author;
@@ -113,16 +115,16 @@ var loadPageCtrl = function() {
     if (!newComment.comment.trim() || !newComment.author.trim()) {
       return false;
       vm.newComment = {};
+      vm.newComment.$setPristine();
     }
     post.comments.push(new Comment(newComment));
     vm.newComment = {};
-    post.ng
   };
 
   vm.postPost = function(newPost) {
     vm.posts.push(new Post(newPost));
-    newPost = {};
-    createPost.$setPristine();
+    vm.newPost = {};
+    vm.createPost.$setPristine();
   }
 
-}]);
+}
