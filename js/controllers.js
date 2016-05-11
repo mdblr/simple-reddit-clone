@@ -108,11 +108,19 @@ redditCloneCtrl.controller('loadPageCtrl', ['$scope',
     }
 
     $scope.postComment = function(post, newComment) {
+      if (!newComment.comment.trim() || !newComment.author.trim()) {
+        return false;
+        $scope.newComment = {};
+      }
       post.comments.push(new Comment(newComment));
+      $scope.newComment = {};
+      post.ng
     };
 
     $scope.postPost = function(newPost) {
       $scope.posts.push(new Post(newPost));
+      newPost = {};
+      createPost.$setPristine();
     }
 
   }]);

@@ -71,7 +71,7 @@
                   </section>
                   &nbsp;/&nbsp;
                   <section>
-                    <a href='#{{post.id}}' ng-click='commentForm=!commentForm'>add comment</a>
+                    <a href='' ng-click='commentForm=!commentForm'>add comment</a>
                   </section>
                 </main>
 
@@ -98,12 +98,12 @@
 
                 <section id='{{post.id}}' class='centerLine'>
                   <h4 ng-show='commentForm'>add comment</h4>
-                  <form name='addComments' ng-show='commentForm' class=' hiddenForm comments'>
+                  <form name='addComments' ng-show='commentForm' class=' hiddenForm comments' novalidate>
                     <div class='form-group'>
-                      <input ng-model="newComment.author" placeholder='who you are' required />
+                      <input ng-model="newComment.author" placeholder='who you are' />
                     </div>
                     <div class='form-group'>
-                      <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' required></textarea>
+                      <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' ></textarea>
                     </div>
                     <input type="submit" class='btn' ng-click='postComment(post, newComment)'/>
                   </form>
