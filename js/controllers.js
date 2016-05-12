@@ -4,36 +4,22 @@ angular
   .module('simpleRedditClone')
   .controller('loadPageCtrl', loadPageCtrl);
 
-loadPageCtrl.$inject = ['$http'];
+loadPageCtrl.$inject = ['PostFactory'];
 
-function loadPageCtrl($http) {
+function loadPageCtrl(PostFactory) {
 
   var vm = this;
   vm.orderProp = 'sort';
   vm.vote = function(post, dir) {
     dir === 'up' ? post.vote +=1 : post.vote -=1 ;
   }
-  
+
   vm.showComments = false;
   vm.commentForm = false;
   vm.hidePostForm = false;
   vm.newComment = {};
 
-  var calendarParameters = {
-    sameDay: '[today] @ h:mm:ss a',
-    lastDay: '[yesterday] @ h:mm:ss a',
-    lastWeek: '[last] dddd MM/DD/YYYY',
-    sameElse: 'on MM/DD/YYYY'
-  }
-
-  $http.get('posts.json')
-  .then(function(data) {
-    console.log(data.data.data);
-    vm.posts = data.data.data;
-  })
-  .catch(function(error) {
-    console.log(error);
-  })
+  vm.posts = PostFactory.getPosts();
 
   var Comment = function(newComment) {
     var timestamp = Date.now();
