@@ -19,13 +19,14 @@ function loadPageCtrl(PostFactory) {
   vm.hidePostForm = false;
   vm.newComment = {};
 
+
   vm.posts = PostFactory.getPosts();
 
   var Comment = function(newComment) {
     var timestamp = Date.now();
     this.author = newComment.author;
     this.comment = newComment.comment;
-    this.time= moment().calendar(null, calendarParameters);
+    this.time= moment().calendar(null, PostFactory.calendarParameters);
     this.vote= 0;
     this.id = Math.random()*1000000+timestamp;
   }
@@ -35,7 +36,7 @@ function loadPageCtrl(PostFactory) {
     this.title = newPost.title;
     this.description = newPost.description;
     this.img = newPost.img;
-    this.date = [new Date(), moment().calendar(null, calendarParameters)];
+    this.date = [new Date(), moment().calendar(null, PostFactory.calendarParameters)];
     this.vote= 0;
     this.comments = [];
   }
