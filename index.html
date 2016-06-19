@@ -9,6 +9,7 @@
     <script type="text/javascript" src='js/controllers.js'></script>
     <script type="text/javascript" src='node_modules/moment/moment.js'></script>
     <script type="text/javascript" src='js/PostsService.js'></script>
+    <script type="text/javascript" src='js/comments/add-comment.dir.js'></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -97,19 +98,8 @@
                     </div>
                   </li>
                 </ul>
-
-                <section id='{{post.id}}' class='centerLine'>
-                  <h4 ng-show='home.commentForm'>add comment</h4>
-                  <form name='addComments' ng-show='commentForm' class=' hiddenForm comments' novalidate>
-                    <div class='form-group'>
-                      <input ng-model="newComment.author" placeholder='who you are' />
-                    </div>
-                    <div class='form-group'>
-                      <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' ></textarea>
-                    </div>
-                    <input type="submit" class='btn' ng-click='home.postComment(post, newComment)'/>
-                  </form>
-                </section>
+                
+                <dir-add-comment></dir-add-comment>
               </aside>
 
               </div>
