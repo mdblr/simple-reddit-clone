@@ -102,10 +102,10 @@
                   <h4 ng-show='home.commentForm'>add comment</h4>
                   <form name='addComments' ng-show='commentForm' class=' hiddenForm comments' novalidate>
                     <div class='form-group'>
-                      <input ng-model="home.newComment.author" placeholder='who you are' />
+                      <input ng-model="newComment.author" placeholder='who you are' />
                     </div>
                     <div class='form-group'>
-                      <textarea type='text' ng-model="home.newComment.comment" cols='35' rows='5' placeholder='write stuff' ></textarea>
+                      <textarea type='text' ng-model="newComment.comment" cols='35' rows='5' placeholder='write stuff' ></textarea>
                     </div>
                     <input type="submit" class='btn' ng-click='home.postComment(post, newComment)'/>
                   </form>
