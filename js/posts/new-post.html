@@ -1,0 +1,26 @@
+<a href='#newPost' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
+
+<section>
+  <form id='newPost' name='createPost' ng-show='home.hidePostForm' class='hiddenForm r' >
+
+    <!-- submit buttons -->
+    <section class='c'>
+      <input class='btn btn-sm btn-danger' type="submit" ng-click='home.postPost(home.newPost)'/>
+      <a class='btn btn-sm btn-primary' ng-click='home.hidePostForm=!home.hidePostForm'>Cancel</a>
+    </section>
+
+    <!-- fields -->
+    <section class='c col-md-3'>
+      <div>
+        <input ng-model="home.newPost.title"  placeholder='title (required)' required />
+      </div>
+      <div>
+        <input placeholder='image url (required)' ng-model="home.newPost.img" required />
+      </div>
+      <div>
+        <textarea type='text' cols='80' rows='10' ng-model="home.newPost.description" placeholder='write stuff' required></textarea>
+      </div>
+    </section>
+
+  </form>
+</section>
