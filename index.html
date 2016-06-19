@@ -10,6 +10,8 @@
     <script type="text/javascript" src='node_modules/moment/moment.js'></script>
     <script type="text/javascript" src='js/PostsService.js'></script>
     <script type="text/javascript" src='js/comments/add-comment.dir.js'></script>
+    <script type="text/javascript" src='js/comments/show-comments.dir.js'></script>
+
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -77,8 +79,8 @@
                     {{home.commentForm}}
                   </section>
                 </main>
-
-                <ul>
+                <dir-show-comments></dir-show-comments>
+                <!-- <ul>
                   <li ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
                     <div class='r'>
                       <aside class='c commentsBuffer'>
@@ -97,8 +99,8 @@
                       </main>
                     </div>
                   </li>
-                </ul>
-                
+                </ul> -->
+
                 <dir-add-comment></dir-add-comment>
               </aside>
 
