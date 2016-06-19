@@ -11,6 +11,8 @@
     <script type="text/javascript" src='js/PostsService.js'></script>
     <script type="text/javascript" src='js/comments/add-comment.dir.js'></script>
     <script type="text/javascript" src='js/comments/show-comments.dir.js'></script>
+    <script type="text/javascript" src='js/posts/new-post.dir.js'></script>
+
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
@@ -76,66 +78,17 @@
                   &nbsp;/&nbsp;
                   <section>
                     <a href='' ng-click='commentForm = !commentForm'>add comment</a>
-                    {{home.commentForm}}
                   </section>
                 </main>
                 <dir-show-comments></dir-show-comments>
-                <!-- <ul>
-                  <li ng-show='showComments' class='hiddenForm comments' ng-repeat='comment in post.comments'>
-                    <div class='r'>
-                      <aside class='c commentsBuffer'>
-                        <h6>[votes: {{ comment.vote }}]</h6>
-                        <aside>
-                          <a href='' ng-click='home.vote(comment, "up")'>up</a> /
-                          <a href='' ng-click='home.vote(comment, "down")'>down</a>
-                        </aside>
-                      </aside>
-                      <main class='breakWord'>
-                        <h5>{{comment.author}}</h5>
-                        <main class='breakWord'>
-                          "{{comment.comment}}"
-                        </main>
-                        <h4><small>{{comment.time}}</small></h4>
-                      </main>
-                    </div>
-                  </li>
-                </ul> -->
-
                 <dir-add-comment></dir-add-comment>
               </aside>
-
               </div>
-
             </footer>
           </div>
         </main>
-
-        <a href='#newPost' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
-        <section>
-          <form id='newPost' name='createPost' ng-show='home.hidePostForm' class='hiddenForm r' >
-            <section class='c'>
-              <input class='btn btn-sm btn-danger' type="submit" ng-click='home.postPost(home.newPost)'/>
-              <a class='btn btn-sm btn-primary' ng-click='home.hidePostForm=!home.hidePostForm'>Cancel</a>
-            </section>
-            <section class='c col-md-3'>
-
-              <div>
-                <input ng-model="home.newPost.title"  placeholder='title (required)' required />
-                {{home.newPost.title}}
-              </div>
-              <div>
-                <input placeholder='image url (required)' ng-model="home.newPost.img" required />
-              </div>
-              <div>
-                <textarea type='text' cols='80' rows='10' ng-model="home.newPost.description" placeholder='write stuff' required></textarea>
-              </div>
-
-            </section>
-
-          </form>
-        </section>
+        <dir-new-post></dir-new-post>
       </section>
     </div>
-
   </body>
 </html>
