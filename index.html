@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html ng-app='simpleRedditClone'>
+
   <head>
     <meta charset="utf-8">
     <title>simple reddit clone</title>
+    <!-- js -->
     <script type="text/javascript" src='node_modules/angular/angular.js' /></script>
-      <script type="text/javascript" src='node_modules/angular-animate/angular-animate.js' /></script>
+    <script type="text/javascript" src='node_modules/angular-animate/angular-animate.js' /></script>
     <script type="text/javascript" src='js/app.js'></script>
     <script type="text/javascript" src='js/controllers.js'></script>
     <script type="text/javascript" src='node_modules/moment/moment.js'></script>
     <script type="text/javascript" src='js/PostsService.js'></script>
+    <script type="text/javascript" src='js/posts/posts.dir.js'></script>
+    <script type="text/javascript" src='js/posts/new-post.dir.js'></script>
+    <script type="text/javascript" src='js/posts/sort-posts.dir.js'></script>
     <script type="text/javascript" src='js/comments/add-comment.dir.js'></script>
     <script type="text/javascript" src='js/comments/show-comments.dir.js'></script>
-    <script type="text/javascript" src='js/posts/new-post.dir.js'></script>
 
-
+    <!-- css  -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
+
   <body ng-controller='loadPageCtrl as home'>
 
     <div class='r container reverseRow'>
       <header>
         <div class='c spaceBetween'>
-          <h6 class='text-primary'>angular intro with simple reddit clone</h6>
+          <h6 class='text-primary'>angular simple reddit clone</h6>
           <input class='form-group' placeholder='search' ng-model='home.search' />
-
-          <select class='form-group' ng-model='app.orderProp'>
+          <dir-sort-posts class='c'></dir-sort-posts>
+          <!-- <select class='form-group' ng-model='home.orderProp'>
             <option value='sort'>sort posts</option>
             <option value='-vote'>by rating</option>
             <option value='-date[0]'>by newest</option>
-          </select>
+          </select> -->
         </div>
 
         <div>
@@ -38,20 +43,7 @@
       </header>
       <section class='c col-md-9'>
         <main class='post' ng-repeat='post in home.posts | orderBy: home.orderProp | filter: home.search'>
-          <section class='r centerLine'>
-            <aside>
-              <img ng-src='{{post.img}}' />
-            </aside>
-
-
-            <main class='c'>
-              <post>
-                <h3>{{post.title}} <br /> <small>posted {{post.date[1]}}</small></h3>
-                <p id='epoch'>{{post.date[0]}}</p>
-                <p class='breakWord'>"{{post.description}}"</p>
-              </post>
-            </main>
-          </section>
+          <dir-posts> </dir-posts>
 
           <div>
             <footer class='r'>
