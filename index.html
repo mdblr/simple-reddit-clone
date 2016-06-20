@@ -11,11 +11,14 @@
     <script type="text/javascript" src='js/controllers.js'></script>
     <script type="text/javascript" src='node_modules/moment/moment.js'></script>
     <script type="text/javascript" src='js/PostsService.js'></script>
+    <script type="text/javascript" src='js/votes/vote.dir.js'></script>
+
     <script type="text/javascript" src='js/posts/posts.dir.js'></script>
     <script type="text/javascript" src='js/posts/new-post.dir.js'></script>
     <script type="text/javascript" src='js/posts/sort-posts.dir.js'></script>
     <script type="text/javascript" src='js/comments/add-comment.dir.js'></script>
     <script type="text/javascript" src='js/comments/show-comments.dir.js'></script>
+
 
     <!-- css  -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
@@ -25,62 +28,76 @@
   <body ng-controller='loadPageCtrl as home'>
 
     <div class='r container reverseRow'>
-      <header>
+
+      <aside>
         <div class='c spaceBetween'>
-          <h6 class='text-primary'>angular simple reddit clone</h6>
-          <input class='form-group' placeholder='search' ng-model='home.search' />
-          <dir-sort-posts class='c'></dir-sort-posts>
-          <!-- <select class='form-group' ng-model='home.orderProp'>
-            <option value='sort'>sort posts</option>
-            <option value='-vote'>by rating</option>
-            <option value='-date[0]'>by newest</option>
-          </select> -->
+          
+          <header>
+            <h6 class='text-primary'>angular simple reddit clone</h6>
+          </header>
+
+          <main>
+            <input class='form-group' placeholder='search' ng-model='home.search' />
+            <dir-sort-posts class='c'>
+            </dir-sort-posts>
+          </main>
+
+          <footer>
+            <a href='#newPost' class='pull-right' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
+          </footer>
         </div>
+      </aside>
 
-        <div>
-          <a href='#newPost' class='pull-right' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
-        </div>
-      </header>
-      <section class='c col-md-9'>
-        <main class='post' ng-repeat='post in home.posts | orderBy: home.orderProp | filter: home.search'>
-          <dir-posts> </dir-posts>
+      <main class='c col-md-9'>
+        <section class='post' ng-repeat='post in home.posts | orderBy: home.orderProp | filter: home.search'>
 
-          <div>
-            <footer class='r'>
-              <div class="c">
-                <aside class='r centerLine'>
-                  <section><h5>[ votes: {{post.vote}} ] &nbsp; </h5></section>
-                  <section id='voter'>
-                    <a href='#' ng-click='home.vote(post, "up")'>up</a> /
-                    <a href='#' ng-click='home.vote(post, "down")'>down</a>
-                  </section>
-                </aside>
+          <main>
+            <dir-posts>
+            </dir-posts>
+          </main>
 
-                <main id='postInfoAside' class='r'>
-                  <section>
-                    <a href='#' ng-click='showComments=!showComments'>
-                      <ng-pluralize count='post.comments.length' when="{
-                        '0': 'No comments',
-                        '1': '{{post.comments.length}} comment',
-                        'other': '{{post.comments.length}} comments'
-                        }">
-                      </ng-pluralize>
-                    </a>
-                  </section>
-                  &nbsp;/&nbsp;
-                  <section>
-                    <a href='' ng-click='commentForm = !commentForm'>add comment</a>
-                  </section>
-                </main>
-                <dir-show-comments></dir-show-comments>
-                <dir-add-comment></dir-add-comment>
+          <footer class='r'>
+            <div class="c">
+
+              <aside class='r centerLine'>
+                <section><h5>[ votes: {{post.vote}} ] &nbsp; </h5></section>
+                <dir-vote dir='home' obj='post'></dir-vote>
               </aside>
-              </div>
-            </footer>
-          </div>
-        </main>
-        <dir-new-post></dir-new-post>
-      </section>
+
+              <main id='postInfoAside' class='r'>
+
+                <section>
+                  <a href='#' ng-click='showComments=!showComments'>
+                    <ng-pluralize count='post.comments.length' when="{
+                      '0': 'No comments',
+                      '1': '{{post.comments.length}} comment',
+                      'other': '{{post.comments.length}} comments'
+                      }">
+                    </ng-pluralize>
+                  </a>
+                </section>&nbsp;/&nbsp;
+
+                <section>
+                  <a href='' ng-click='commentForm = !commentForm'>add comment</a>
+                </section>
+
+              </main>
+              <footer>
+                <dir-show-comments>
+                </dir-show-comments>
+                <dir-add-comment>
+                </dir-add-comment>
+              </footer>
+
+            </div>
+          </footer>
+        </section>
+
+        <footer>
+          <dir-new-post>
+          </dir-new-post>
+        </footer>
+      </main>
     </div>
   </body>
 </html>
