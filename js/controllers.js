@@ -54,7 +54,6 @@ function loadPageCtrl(PostFactory) {
   vm.postPost = function(newPost) {
     vm.posts.push(new Post(newPost));
     vm.newPost = {};
-    vm.createPost.$setPristine();
   }
 
 }
