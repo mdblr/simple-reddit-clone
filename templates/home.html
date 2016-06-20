@@ -1,0 +1,74 @@
+<div class='r container reverseRow'>
+
+  <aside>
+    <div class='c spaceBetween'>
+
+      <header>
+        <h6 class='text-primary'>angular simple reddit clone</h6>
+      </header>
+
+      <main>
+        <input class='form-group' placeholder='search' ng-model='home.search' />
+        <dir-sort-posts class='c'>
+        </dir-sort-posts>
+      </main>
+
+      <footer>
+        <a class='pull-right' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
+      </footer>
+    </div>
+  </aside>
+
+  <main class='c col-md-9'>
+    <section class='post' ng-repeat='post in home.posts | orderBy: home.orderProp | filter: home.search'>
+
+      <main>
+        <dir-posts>
+        </dir-posts>
+      </main>
+
+      <footer class='r'>
+        <div class="c">
+
+          <aside class='r centerLine'>
+            <section><h5>[ votes: {{post.vote}} ] &nbsp; </h5></section>
+            <dir-vote dir='home' obj='post'></dir-vote>
+          </aside>
+
+          <main id='postInfoAside' class='r'>
+
+            <section>
+              <a href='' ng-click='showComments=!showComments'>
+                <ng-pluralize count='post.comments.length' when="{
+                  '0': 'No comments',
+                  '1': '{{post.comments.length}} comment',
+                  'other': '{{post.comments.length}} comments'
+                  }">
+                </ng-pluralize>
+              </a>
+            </section>&nbsp;/&nbsp;
+
+            <section>
+              <a href='' ng-click='commentForm = !commentForm'>add comment</a>
+            </section>
+
+          </main>
+          <footer>
+            <dir-show-comments>
+            </dir-show-comments>
+            <dir-add-comment>
+            </dir-add-comment>
+          </footer>
+
+        </div>
+      </footer>
+    </section>
+
+    <footer id='newPost'>
+      <dir-new-post>
+      </dir-new-post>
+    </footer>
+
+
+  </main>
+</div>
