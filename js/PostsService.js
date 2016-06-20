@@ -77,7 +77,6 @@
 
       return {
         getPosts: function () {
-          console.log(posts);
           return posts;
         }
       }
