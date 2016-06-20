@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html ng-app='simpleRedditClone'>
-
   <head>
     <meta charset="utf-8">
     <title>simple reddit clone</title>
+    <base href="/">
     <!-- js -->
-    <script type="text/javascript" src='node_modules/angular/angular.js' /></script>
-    <script type="text/javascript" src='node_modules/angular-animate/angular-animate.js' /></script>
+    <script type="text/javascript" src='node_modules/angular/angular.js'></script>
+    <script type="text/javascript" src='node_modules/angular-animate/angular-animate.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js" charset="utf-8"></script>
     <script type="text/javascript" src='js/app.js'></script>
     <script type="text/javascript" src='js/controllers.js'></script>
     <script type="text/javascript" src='node_modules/moment/moment.js'></script>
     <script type="text/javascript" src='js/PostsService.js'></script>
     <script type="text/javascript" src='js/votes/vote.dir.js'></script>
-
     <script type="text/javascript" src='js/posts/posts.dir.js'></script>
     <script type="text/javascript" src='js/posts/new-post.dir.js'></script>
     <script type="text/javascript" src='js/posts/sort-posts.dir.js'></script>
@@ -25,79 +25,6 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <body ng-controller='loadPageCtrl as home'>
-
-    <div class='r container reverseRow'>
-
-      <aside>
-        <div class='c spaceBetween'>
-          
-          <header>
-            <h6 class='text-primary'>angular simple reddit clone</h6>
-          </header>
-
-          <main>
-            <input class='form-group' placeholder='search' ng-model='home.search' />
-            <dir-sort-posts class='c'>
-            </dir-sort-posts>
-          </main>
-
-          <footer>
-            <a href='#newPost' class='pull-right' ng-click='home.hidePostForm=!home.hidePostForm'>New Post</a>
-          </footer>
-        </div>
-      </aside>
-
-      <main class='c col-md-9'>
-        <section class='post' ng-repeat='post in home.posts | orderBy: home.orderProp | filter: home.search'>
-
-          <main>
-            <dir-posts>
-            </dir-posts>
-          </main>
-
-          <footer class='r'>
-            <div class="c">
-
-              <aside class='r centerLine'>
-                <section><h5>[ votes: {{post.vote}} ] &nbsp; </h5></section>
-                <dir-vote dir='home' obj='post'></dir-vote>
-              </aside>
-
-              <main id='postInfoAside' class='r'>
-
-                <section>
-                  <a href='#' ng-click='showComments=!showComments'>
-                    <ng-pluralize count='post.comments.length' when="{
-                      '0': 'No comments',
-                      '1': '{{post.comments.length}} comment',
-                      'other': '{{post.comments.length}} comments'
-                      }">
-                    </ng-pluralize>
-                  </a>
-                </section>&nbsp;/&nbsp;
-
-                <section>
-                  <a href='' ng-click='commentForm = !commentForm'>add comment</a>
-                </section>
-
-              </main>
-              <footer>
-                <dir-show-comments>
-                </dir-show-comments>
-                <dir-add-comment>
-                </dir-add-comment>
-              </footer>
-
-            </div>
-          </footer>
-        </section>
-
-        <footer>
-          <dir-new-post>
-          </dir-new-post>
-        </footer>
-      </main>
-    </div>
+  <body ng-view>
   </body>
 </html>
